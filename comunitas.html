@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gowes Elite | Single File Edition (English)</title>
+    
+    <style>
+        :root {
+            --color-primary: #ffee00; 
+            --color-secondary: #f2ff4a; 
+            --bg-darkest: #0e0e0e; 
+            --bg-dark: #1a1a1a; 
+            --bg-medium: #151515; 
+            --color-text-light: #ffffff;
+            --color-text-faded: rgba(255, 255, 255, 0.85);
+            --color-border: #333;
+            --color-danger: #e74c3c;
+            --color-success: #2ecc71;
+            --font-family: 'Montserrat', sans-serif; 
+            --border-radius: 8px;
+        }
+
+        /* Global Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            background-color: var(--bg-darkest);
+            color: var(--color-text-faded);
+            scroll-behavior: smooth;
+            transition: background-color 0.3s;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 1rem;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--color-text-light);
+            font-weight: 700;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: var(--color-secondary);
+        }
+
+        /* Icons (Placeholder styling for SVG vibe) */
+        .icon {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-right: 5px;
+        }
+
+        /* --- HEADER & NAVBAR --- */
+        header {
+            background: var(--bg-darkest);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+        .logo span {
+            color: var(--color-primary);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li a {
+            color: var(--color-text-faded);
+            padding: 0.6rem 1rem;
+            display: block;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: 600;
+        }
+        nav ul li a:hover {
+            background-color: var(--bg-dark);
+            color: var(--color-primary);
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            margin-top: 1rem;
+            border: 2px solid var(--color-primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-out;
+            background: transparent;
+            color: var(--color-primary);
+            box-shadow: 0 0 10px rgba(255, 238, 0, 0);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--bg-darkest);
+            border-color: var(--color-primary);
+        }
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--color-secondary);
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 15px var(--color-secondary); /* Neon Glow Hover */
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-dark);
+            color: var(--color-text-faded);
+            border-color: var(--color-border);
+        }
+        .btn-secondary:hover {
+            background: var(--bg-darkest);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+
+        .btn-danger {
+            background: var(--color-danger);
+            color: var(--color-text-light);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            margin-top: 0;
+        }
+
+        /* --- SECTIONS & LAYOUT --- */
+        .page-view {
+             display: none; 
+        }
+        .page-view.active {
+            display: block; 
+        }
+        
+        .section {
+            padding: 6rem 0;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: url('https://picsum.photos/1920/800?random=1&bike,night,city') no-repeat center center/cover;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--color-text-light);
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero-headline {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(255, 238, 0, 0.5); 
+        }
+
+        .hero-subtext {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Card Styling */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: var(--bg-medium);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 238, 0, 0.2);
+        }
+
+        .card h4 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .card p {
+            color: var(--color-text-faded);
+        }
+
+        /* Rules & Events */
+        .rules-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 2rem;
+        }
+        .rules-list li {
+            background: var(--bg-dark);
+            padding: 1rem;
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--color-primary);
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .event-card {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .event-card strong {
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* --- WARNING SECTION --- */
+        #folding-bike-warning {
+            background: var(--color-danger);
+            color: var(--color-text-light);
+            padding: 2rem;
+            margin: 4rem 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border: 3px solid #ff0000;
+            box-shadow: 0 0 25px rgba(231, 76, 60, 0.9);
+        }
+
+        /* --- FORMS & INPUTS --- */
+        .form-container {
+            max-width: 550px;
+            margin: 0 auto;
+            background: var(--bg-medium);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="url"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 1rem;
+            background: var(--bg-darkest);
+            color: var(--color-text-light);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 8px rgba(255, 238, 0, 0.7);
+            outline: none;
+        }
+
+        .error-message {
+            color: var(--color-danger);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* --- MEMBER & ADMIN STYLING --- */
+        .dashboard-title {
+            color: var(--color-primary);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .data-card {
+            background: var(--bg-medium);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--color-primary);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        .data-card h3 {
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 10px;
+            margin-bottom: 1rem;
+            color: var(--color-text-light);
+        }
+
+        .profile-info p {
+            padding: 5px 0;
+            border-bottom: 1px dotted var(--color-border);
+        }
+        .profile-info strong {
+            color: var(--color-primary);
+            margin-right: 10px;
+        }
+
+        /* Admin Panel Specific */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        .admin-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .admin-card-grid > .data-card:last-child {
+            grid-column: 1 / -1; /* Full width for member table */
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            min-width: 600px;
+        }
+        .data-table th, .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--color-border);
+            text-align: left;
+        }
+        .data-table th {
+            background-color: var(--bg-dark);
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+        .data-table tr:hover {
+            background-color: #1f1f1f;
+        }
+
+        .rules-edit-list {
+            list-style: none;
+            padding: 0;
+        }
+        .rules-edit-list li {
+            background: var(--bg-dark);
+            border: 1px solid var(--color-border);
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 4px;
+            color: var(--color-text-faded);
+        }
+
+        /* Pop-up Modal Styling (for custom alert) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            display: none;
+        }
+        .modal-content {
+            background: var(--bg-dark);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            max-width: 400px;
+            text-align: center;
+            border: 2px solid var(--color-danger);
+            box-shadow: 0 0 30px rgba(231, 76, 60, 0.8);
+        }
+        .modal-content.success {
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 30px rgba(255, 238, 0, 0.8);
+        }
+        .modal-content h4 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-darkest);
+            color: var(--color-text-faded);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        footer p a {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li a {
+                padding: 0.4rem 0.8rem;
+            }
+            .hero-headline {
+                font-size: 2.5rem;
+            }
+            .hero-subtext {
+                font-size: 1.2rem;
+            }
+            .section {
+                padding: 4rem 0;
+            }
+            .form-container {
+                padding: 2rem;
+            }
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .admin-header .btn {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">GOWES<span>ELITE</span></h1>
+            <nav id="main-nav">
+                </nav>
+        </div>
+    </header>
+
+    <main id="main-content-area">
+        
+        <div id="landing-view" class="page-view active">
+            <section id="home" class="hero-section">
+                <div class="hero-overlay"></div>
+                <div class="container hero-content">
+                    <h2 class="hero-headline">Ride Together, Stronger Together.</h2>
+                    <p class="hero-subtext">The most exclusive, disciplined, and performance-focused cycling community. We ride fast, we ride far. This isn't just a hobby, it's a lifestyle.</p>
+                    <a href="#member-login" class="btn btn-primary" onclick="window.location.hash='#member-login'; return false;">Log In via Member</a> 
+                    <a href="#admin-login" class="btn btn-secondary" onclick="window.location.hash='#admin-login'; return false;">Log In via Admin</a> 
+                </div>
+            </section>
+
+            <section id="bikes" class="section" style="padding-top: 2rem;">
+                <div class="container" style="text-align: center;">
+                    <h2>Accepted Bicycle Types 🚲</h2>
+                    <p style="color: var(--color-text-faded); margin-bottom: 3rem;">We only accept full-size bikes focused on high performance and challenge.</p>
+                    
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4><span class="icon">⛰️</span>MTB (Mountain Bike)</h4>
+                            <p>Cross-Country and Enduro disciplines. Focus on technical trails and off-road endurance.</p>
+                        </div>
+                        <div class="card">
+                            <h4><span class="icon">🛣️</span>Roadbike</h4>
+                            <p>Speed and Endurance on the highway. Maintaining a high average speed is key.</p>
+                        </div>
+                        <div class="card">
+                            <h4><span class="icon">⚙️</span>Fixie & Gravel</h4>
+                            <p>Minimalist lifestyle (Fixie) or versatile adventure (Gravel). For souls who love extreme challenges.</p>
+                        </div>
+                        <div class="card">
+                            <h4><span class="icon">⬇️</span>BMX & Downhill</h4>
+                            <p>For the adrenaline junkie. Stunting, dirt jump, or steep downhill disciplines. Not for the faint of heart.</p>
+                        </div>
+                    </div>
+
+                    <div id="folding-bike-warning">
+                        ⚠️ **STRICT WARNING: NO FOLDING BIKES ALLOWED!** <br> 
+                        This community **absolutely** prohibits the use of Folding Bikes.
+                    </div>
+                </div>
+            </section>
+
+            <section id="rules-section" class="section" style="background: var(--bg-dark);">
+                <div class="container" style="text-align: center;">
+                    <h2>Key Community Rules 🔑</h2>
+                    <div id="community-rules" style="max-width: 800px; margin: 0 auto;">
+                        <p>Loading Rules...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="events-section" class="section">
+                <div class="container" style="text-align: center;">
+                    <h2>Our Weekly Events 🗓️</h2>
+                    <div class="card-grid" style="max-width: 900px; margin: 3rem auto;">
+                        <div class="event-card card">
+                            <h4><span class="icon">🌃</span>Elite Sunday Climb</h4>
+                            <strong>Schedule:</strong> Sunday, 06:00 AM (WIB)
+                            <p><strong>Meetup Point:</strong> Cibubur Toll Gate</p>
+                            <p><strong>Distance:</strong> ±80KM | Elevation Gain 1200M</p>
+                        </div>
+                        <div class="event-card card">
+                            <h4><span class="icon">⚡</span>Fast Friday Night</h4>
+                            <strong>Schedule:</strong> Friday, 09:00 PM (WIB)
+                            <p><strong>Meetup Point:</strong> Senayan Park</p>
+                            <p><strong>Distance:</strong> ±50KM | Average Speed 35+ km/h</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="member-login-section" class="section" style="background: var(--bg-dark);">
+                <div class="container">
+                    <h2 style="text-align: center;">Member Login/Registration 📝</h2>
+                    <div class="form-container">
+                        <form id="member-register-form">
+                             <p style="text-align: center; margin-bottom: 20px; font-style: italic;">
+                                Enter your details to log in or register as a new member.
+                            </p>
+                            <div class="form-group">
+                                <label for="reg-name">Full Name</label>
+                                <input type="text" id="reg-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-age">Age</label>
+                                <input type="number" id="reg-age" required min="15" max="99">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-city">City/Origin</label>
+                                <input type="text" id="reg-city" required placeholder="Example: Jakarta">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-wa">WhatsApp Number</label>
+                                <input type="text" id="reg-wa" required placeholder="Example: 08123456789 (Use format without spaces)">
+                            </div>
+                            <div class="form-group">
+                                <label for="reg-bike">Bicycle Type Used</label>
+                                <select id="reg-bike" required>
+                                    <option value="">-- Select Bike Type --</option>
+                                    <option value="MTB">MTB</option>
+                                    <option value="Roadbike">Roadbike</option>
+                                    <option value="Gravel">Gravel</option>
+                                    <option value="Fixie">Fixie</option>
+                                    <option value="BMX">BMX</option>
+                                    <option value="Downhill">Downhill</option>
+                                    <option value="Folding Bike">Folding Bike (PROHIBITED)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Log In / Register</button>
+                            <p class="error-message" id="member-login-error" style="text-align: center;"></p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="admin-login-section" class="section">
+                <div class="container">
+                    <h2 style="text-align: center;">Log In via Admin 🔒</h2> 
+                    <div class="form-container">
+                        <form id="admin-login-form">
+                            <div class="form-group">
+                                <label for="admin-username">Username</label>
+                                <input type="text" id="admin-username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-password">Password</label>
+                                <input type="password" id="admin-password" required>
+                            </div>
+                            <p class="error-message" id="admin-login-error"></p>
+                            <button type="submit" class="btn btn-secondary" style="width: 100%;">Admin Login</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <div id="member-view" class="page-view">
+            <div class="container">
+                <h2 class="dashboard-title">Hello, <span id="member-name-display" style="color: var(--color-primary);">Elite Member</span>! 👋</h2>
+                
+                <div class="card-grid">
+                    
+                    <div class="data-card" style="grid-column: span 2;">
+                        <h3><span class="icon">💾</span> Your Profile Data</h3>
+                        <div id="member-profile-info" class="profile-info">
+                            <p>Loading...</p>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button id="btn-edit-data" class="btn btn-secondary">Edit Data</button>
+                        </div>
+                    </div>
+
+                    <div class="data-card" style="border-left-color: var(--color-danger);">
+                        <h3><span class="icon">📢</span> Admin Announcement</h3>
+                        <div id="announcement-display" style="white-space: pre-wrap;">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div class="data-card" style="grid-column: span 3;">
+                        <h3><span class="icon">📅</span> Cycling Schedule & Events</h3>
+                        <div id="member-events">
+                            <div class="event-card">
+                                <strong>🔥 JAKARTA NIGHT RIDE V.3</strong>
+                                <p><strong>Schedule:</strong> Every Saturday Night (08:00 PM WIB)</p>
+                                <p><strong>Meetup:</strong> Horse Statue (Starting Point)</p>
+                                <p><strong>Distance:</strong> ±60KM (Fast Pace) | **Roadbike/Fixie Required**</p>
+                            </div>
+                            <div class="event-card">
+                                <strong>⛰️ PUNCAK CHALLENGE (MTB/Gravel)</strong>
+                                <p><strong>Schedule:</strong> First Sunday of Every Month (06:00 AM WIB)</p>
+                                <p><strong>Meetup:</strong> Rest Area KM 45</p>
+                                <p><strong>Distance:</strong> ±45KM (Climbing Pace)</p>
+                            </div>
+                        </div>
+                        <p style="text-align: right; margin-top: 1rem;">
+                            <a id="group-link-member" href="#" target="_blank" class="btn btn-primary btn-small">Join WhatsApp Group</a> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="admin-view" class="page-view">
+            <div class="container">
+                <div class="admin-header">
+                    <h2 class="dashboard-title"><span class="icon">🛡️</span> Elite Admin Panel</h2>
+                </div>
+                
+                <div class="admin-card-grid">
+
+                    <div class="data-card" style="border-left-color: var(--color-success); text-align: center;">
+                        <h3><span class="icon">📊</span> Elite Statistics</h3>
+                        <p style="font-size: 3rem; color: var(--color-primary); font-weight: 900;" id="member-count">0</p>
+                        <p>Total Registered Members</p>
+                    </div>
+
+                    <div class="data-card">
+                        <h3><span class="icon">📢</span> Broadcast Announcement</h3>
+                        <form id="admin-announcement-form">
+                            <div class="form-group">
+                                <label for="admin-announcement">Announcement Content (Appears on Member Dashboard)</label>
+                                <textarea id="admin-announcement" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-small">Broadcast!</button>
+                        </form>
+                    </div>
+
+                    <div class="data-card">
+                        <h3><span class="icon">🔗</span> Community Contact (WhatsApp)</h3> 
+                        <form id="admin-group-link-form">
+                            <p style="font-size: 0.9em;">Current Number: <strong id="current-group-link" style="word-break: break-all;">Loading...</strong></p> 
+                            <div class="form-group">
+                                <label for="current-group-link-input">New WhatsApp Number</label> 
+                                <input type="text" id="current-group-link-input" required placeholder="Example: 08123456789"> 
+                            </div>
+                            <button type="submit" class="btn btn-secondary btn-small">Save Number</button>
+                        </form>
+                    </div>
+
+                    <div class="data-card">
+                        <h3><span class="icon">📜</span> Manage Community Rules</h3>
+                        <p style="font-size: 0.9em;">Total Rules: <strong id="rules-count" style="color: var(--color-primary);">0</strong></p>
+                        <ul id="active-rules-list" class="rules-edit-list" style="margin-bottom: 20px;">
+                            </ul>
+
+                        <form id="admin-rules-form">
+                            <div class="form-group">
+                                <label for="admin-new-rule">Add New Rule</label>
+                                <input type="text" id="admin-new-rule" placeholder="Example: Must bring a tool set">
+                            </div>
+                            <button type="button" id="btn-add-rule" class="btn btn-primary btn-small">Add Rule</button>
+                        </form>
+                    </div>
+
+                    <div class="data-card" style="grid-column: 1 / -1;">
+                        <h3><span class="icon">👥</span> All Member Table</h3>
+                        <div class="table-responsive">
+                            <table id="member-list-table" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>City</th> 
+                                        <th>WhatsApp</th> 
+                                        <th>Bike Type</th>
+                                        <th>Date Joined</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p id="footer-text">&copy; 2024 GOWES ELITE. Ride Hard, Stay Sharp.</p>
+            <p id="footer-contact">
+                Contact: <a href="mailto:admin@goweselite.com">admin@goweselite.com</a> | Instagram: <a href="#">@GowesEliteOfficial</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay">
+        <div class="modal-content success">
+            <h4></h4>
+            <p></p>
+            <button class="btn btn-primary" onclick="this.closest('.modal-overlay').style.display='none'">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // script.js (FIXED SCROLLING)
+
+        // --- CONSTANTS & CONFIGURATION ---
+        const COMMUNITY_NAME = "Gowes Elite";
+        const DILARANG_KERAS = "Folding Bike"; 
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "queen"; 
+        const MY_WA_NUMBER = "081542192623"; 
+
+        // LocalStorage Keys
+        const KEYS = {
+            MEMBERS: "GE_Members",
+            RULES: "GE_Rules",
+            GROUP_LINK: "GE_GroupLink", 
+            ANNOUNCEMENT: "GE_Announcement",
+            ACTIVE_MEMBER: "GE_ActiveMemberId",
+            IS_ADMIN: "GE_IsAdminLoggedIn"
+        };
+
+        // --- LOCALSTORAGE UTILITY FUNCTIONS ---
+        const getData = (key, defaultValue) => {
+            const data = localStorage.getItem(key);
+            try {
+                return data ? JSON.parse(data) : defaultValue;
+            } catch (e) {
+                console.error("Error parsing data for key:", key, e);
+                return defaultValue;
+            }
+        };
+
+        const saveData = (key, data) => {
+            localStorage.setItem(key, JSON.stringify(data));
+        };
+
+        const getMembers = () => getData(KEYS.MEMBERS, []);
+        const saveMembers = (members) => saveData(KEYS.MEMBERS, members);
+
+        const getRules = () => {
+            const defaultRules = [
+                "Must wear an SNI certified helmet and complete safety gear.",
+                "Strictly prohibited to bring a folding bike. Violation = Removal.", 
+                "Commitment to the route. No casual riding in the elite group.", 
+                "Time discipline and mutual respect on the road.", 
+            ];
+            return getData(KEYS.RULES, defaultRules);
+        };
+
+        const getAnnouncement = () => localStorage.getItem(KEYS.ANNOUNCEMENT) || "There are currently no elite announcements from the Admin. Keep up the spirit!"; 
+        
+        const getGroupLink = () => localStorage.getItem(KEYS.GROUP_LINK) || MY_WA_NUMBER;
+        
+        const formatWALink = (number) => `https://wa.me/${number.replace(/\D/g, '')}`;
+
+
+        // --- NAVIGATION & AUTHENTICATION FUNCTIONS ---
+
+        /** Display Custom Modal/Alert */
+        const showCustomAlert = (message, isSuccess = true) => {
+            const modal = document.querySelector('.modal-overlay');
+            const content = modal.querySelector('.modal-content');
+            
+            content.className = `modal-content ${isSuccess ? 'success' : 'danger'}`;
+            content.querySelector('h4').textContent = isSuccess ? '✅ Success!' : '❌ Error'; 
+            content.querySelector('p').textContent = message;
+            
+            modal.style.display = 'flex';
+        };
+        
+        // Function to smoothly scroll to the required form section (NEW)
+        const scrollToForm = (hash) => {
+            const targetId = hash.substring(1) + '-section'; 
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                // Use smooth scroll behavior to move to the form
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        };
+
+        /** Switch views between Landing, Member, or Admin */
+        const navigateToView = (viewId, hash = null) => { 
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+            
+            // Set Header Navigation
+            const nav = document.getElementById('main-nav');
+            if (viewId === 'landing-view') {
+                nav.innerHTML = `
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#bikes">Bike Types</a></li>
+                        <li><a href="#rules-section">Rules</a></li>
+                        <li><a href="#member-login" class="btn-primary" onclick="window.location.hash='#member-login'; return false;">Log In!</a></li>
+                    </ul>
+                `;
+                document.getElementById('footer-text').textContent = "© 2024 GOWES ELITE. Ride Hard, Stay Sharp.";
+                document.getElementById('footer-contact').style.display = 'block';
+                setupIndexPageElements(); 
+                
+                // If there's a hash, scroll to that specific section
+                if (hash) {
+                    // Small delay ensures content is rendered before scrolling
+                    setTimeout(() => { 
+                        scrollToForm(hash);
+                    }, 100); 
+                } else {
+                    window.scrollTo(0, 0); // Scroll to top if no specific hash
+                }
+
+            } else if (viewId === 'member-view') {
+                nav.innerHTML = `
+                    <ul>
+                        <li><a href="#" onclick="memberLogout(); return false;">Home</a></li>
+                        <li><a href="#" id="btn-logout" class="btn-danger" onclick="memberLogout(); return false;">Logout</a></li>
+                    </ul>
+                `;
+                document.getElementById('footer-text').textContent = "© 2024 GOWES ELITE. Member Dashboard.";
+                document.getElementById('footer-contact').style.display = 'none';
+                setupMemberPage();
+                window.scrollTo(0, 0); // Scroll to top for dashboard
+
+            } else if (viewId === 'admin-view') {
+                 nav.innerHTML = `
+                    <ul>
+                        <li><a href="#" onclick="adminLogout(); return false;">Home</a></li>
+                        <li><button id="admin-logout-btn" class="btn btn-danger btn-small" style="margin: 0; padding: 0.5rem 1rem;">Logout</button></li>
+                    </ul>
+                `;
+                document.getElementById('footer-text').textContent = "© 2024 GOWES ELITE. Admin Access Only.";
+                document.getElementById('footer-contact').style.display = 'none';
+                document.getElementById('admin-logout-btn').addEventListener('click', adminLogout);
+                setupAdminPage();
+                window.scrollTo(0, 0); // Scroll to top for dashboard
+            }
+        };
+        
+        // --- PER-VIEW LOGIC (Functions remain the same) ---
+
+        // --- LANDING VIEW LOGIC ---
+        const setupIndexPageElements = () => {
+            const rulesContainer = document.getElementById('community-rules');
+            if (rulesContainer) {
+                const rules = getRules();
+                rulesContainer.innerHTML = `
+                    <ul class="rules-list">
+                        ${rules.map(rule => `<li><span class="icon">⚡</span>${rule}</li>`).join('')}
+                    </ul>
+                `;
+            }
+        };
+
+        const handleMemberLogin = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value.trim();
+            const age = parseInt(document.getElementById('reg-age').value);
+            const city = document.getElementById('reg-city').value.trim(); 
+            const waNumber = document.getElementById('reg-wa').value.trim(); 
+            const bike = document.getElementById('reg-bike').value;
+            const errorDiv = document.getElementById('member-login-error');
+            errorDiv.textContent = '';
+            
+            if (bike === DILARANG_KERAS) {
+                showCustomAlert(`The ${COMMUNITY_NAME} community **DOES NOT ACCEPT** folding bikes. This is an absolute rule!`, false); 
+                return;
+            }
+
+            if (!name || isNaN(age) || age < 15 || !city || !waNumber) { 
+                 errorDiv.textContent = "Please fill in all data correctly (Min. age 15 years).";
+                 return;
+            }
+
+            let members = getMembers();
+            
+            // 1. Try to find existing member
+            const existingMember = members.find(m => 
+                m.name.toLowerCase() === name.toLowerCase() &&
+                m.age === age &&
+                m.city.toLowerCase() === city.toLowerCase()
+            );
+
+            let memberToLogin;
+            
+            if (existingMember) {
+                // Member Found: Update WA number if changed, then log in
+                existingMember.waNumber = waNumber;
+                memberToLogin = existingMember;
+                saveMembers(members); 
+                showCustomAlert(`Welcome back, ${name}! Logging into Member Dashboard...`, true); 
+            } else {
+                // Member Not Found: Register new member
+                const newMember = {
+                    id: Date.now(),
+                    name: name,
+                    age: age,
+                    city: city, 
+                    waNumber: waNumber, 
+                    bike: bike,
+                    dateJoined: new Date().toLocaleDateString('en-US') 
+                };
+                members.push(newMember);
+                saveMembers(members);
+                memberToLogin = newMember;
+                showCustomAlert(`Welcome, ${name}! You are officially part of the Gowes Elite. Redirecting to Member Dashboard...`, true);
+            }
+            
+            localStorage.setItem(KEYS.ACTIVE_MEMBER, memberToLogin.id);
+            setTimeout(() => {
+                navigateToView('member-view');
+            }, 1500);
+        };
+        
+        const handleAdminLogin = (e) => {
+            e.preventDefault();
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+            const errorDiv = document.getElementById('admin-login-error');
+            errorDiv.textContent = '';
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                localStorage.setItem(KEYS.IS_ADMIN, 'true');
+                showCustomAlert("Admin Login Successful. Redirecting to Admin Panel...", true); 
+                setTimeout(() => {
+                    navigateToView('admin-view');
+                }, 1000);
+            } else {
+                errorDiv.textContent = "Incorrect Admin Username or Password!"; 
+            }
+        };
+
+        // --- MEMBER VIEW LOGIC ---
+        const setupMemberPage = () => {
+            const activeMemberId = parseInt(localStorage.getItem(KEYS.ACTIVE_MEMBER));
+            if (!activeMemberId) {
+                navigateToView('landing-view');
+                return;
+            }
+
+            const members = getMembers();
+            const activeMember = members.find(m => m.id === activeMemberId);
+
+            if (!activeMember) {
+                memberLogout();
+                return;
+            }
+
+            // Populate Profile
+            document.getElementById('member-name-display').textContent = activeMember.name;
+            document.getElementById('member-profile-info').innerHTML = `
+                <p><strong><span class="icon">👤</span>Name:</strong> ${activeMember.name}</p>
+                <p><strong><span class="icon">🎂</span>Age:</strong> ${activeMember.age} Years</p>
+                <p><strong><span class="icon">🏙️</span>City:</strong> ${activeMember.city}</p> 
+                <p><strong><span class="icon">📞</span>WA Number:</strong> ${activeMember.waNumber}</p> 
+                <p><strong><span class="icon">🚲</span>Bike:</strong> ${activeMember.bike}</p>
+                <p><strong><span class="icon">🗓️</span>Since:</strong> ${activeMember.dateJoined}</p>
+            `;
+
+            // Populate Announcement
+            document.getElementById('announcement-display').innerHTML = `<p>${getAnnouncement()}</p>`;
+
+            // Set Group Link (as WA link now)
+            const waNumber = getGroupLink();
+            document.getElementById('group-link-member').href = formatWALink(waNumber);
+            document.getElementById('group-link-member').textContent = `Join WA Group (${waNumber})`;
+
+            // Handle Edit Data (Placeholder)
+            document.getElementById('btn-edit-data').addEventListener('click', () => {
+                showCustomAlert("Personal Data Edit feature is currently under Maintenance. Contact the Admin for data changes.", false); 
+            });
+        };
+
+        const memberLogout = () => {
+            localStorage.removeItem(KEYS.ACTIVE_MEMBER);
+            showCustomAlert("You have logged out. See you at the next ride!", true); 
+            setTimeout(() => {
+                navigateToView('landing-view');
+            }, 1000);
+        };
+
+
+        // --- ADMIN VIEW LOGIC ---
+        const setupAdminPage = () => {
+            const isAdmin = localStorage.getItem(KEYS.IS_ADMIN) === 'true';
+            if (!isAdmin) {
+                navigateToView('landing-view');
+                return;
+            }
+
+            loadAdminData();
+
+            // Attach Event Listeners (ensure only once)
+            document.getElementById('admin-announcement-form').removeEventListener('submit', handleAnnouncementBroadcast);
+            document.getElementById('admin-group-link-form').removeEventListener('submit', handleGroupLinkEdit);
+            document.getElementById('btn-add-rule').removeEventListener('click', addRule);
+            
+            document.getElementById('admin-announcement-form').addEventListener('submit', handleAnnouncementBroadcast);
+            document.getElementById('admin-group-link-form').addEventListener('submit', handleGroupLinkEdit);
+            document.getElementById('btn-add-rule').addEventListener('click', addRule);
+        };
+
+        const adminLogout = () => {
+            localStorage.removeItem(KEYS.IS_ADMIN);
+            showCustomAlert("Admin Logout Successful.", true); 
+            setTimeout(() => {
+                navigateToView('landing-view');
+            }, 1000);
+        };
+
+        const loadAdminData = () => {
+            loadMemberList();
+            loadRulesEditor();
+
+            // Stats and Link
+            document.getElementById('member-count').textContent = getMembers().length;
+            document.getElementById('current-group-link').textContent = getGroupLink();
+            document.getElementById('current-group-link-input').value = getGroupLink();
+        };
+
+        const loadMemberList = () => {
+            const members = getMembers();
+            const tableBody = document.querySelector('#member-list-table tbody');
+            tableBody.innerHTML = '';
+            
+            if (members.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No members registered yet.</td></tr>'; 
+                return;
+            }
+
+            members.forEach(member => {
+                const row = tableBody.insertRow();
+                row.innerHTML = `
+                    <td>${member.name}</td>
+                    <td>${member.age}</td>
+                    <td>${member.city || 'N/A'}</td> 
+                    <td>${member.waNumber || 'N/A'}</td> 
+                    <td style="color:var(--color-primary);">${member.bike}</td>
+                    <td>${member.dateJoined}</td>
+                    <td><button class="btn btn-danger btn-small" onclick="deleteMember(${member.id})">Delete</button></td> 
+                `;
+            });
+        };
+
+        // Make deleteMember globally accessible for onclick in HTML
+        window.deleteMember = (memberId) => {
+            if (confirm("Are you sure you want to delete this member?")) { 
+                let members = getMembers();
+                const updatedMembers = members.filter(m => m.id !== memberId);
+                saveMembers(updatedMembers);
+                showCustomAlert("Member successfully deleted.", true); 
+                loadMemberList();
+            }
+        };
+
+        const handleAnnouncementBroadcast = (e) => {
+            e.preventDefault();
+            const announcementText = document.getElementById('admin-announcement').value.trim();
+
+            if (announcementText) {
+                localStorage.setItem(KEYS.ANNOUNCEMENT, announcementText);
+                showCustomAlert("Announcement successfully broadcasted to Member Dashboard!", true); 
+                document.getElementById('admin-announcement-form').reset();
+            } else {
+                showCustomAlert("Announcement content cannot be empty.", false); 
+            }
+        };
+
+        const handleGroupLinkEdit = (e) => {
+            e.preventDefault();
+            const newLink = document.getElementById('current-group-link-input').value.trim();
+
+            if (newLink) {
+                // Simple validation for WA number format (digits only)
+                if (!/^\d+$/.test(newLink.replace(/\s/g, ''))) {
+                    showCustomAlert("Please enter a valid WhatsApp number (digits only).", false);
+                    return;
+                }
+                
+                localStorage.setItem(KEYS.GROUP_LINK, newLink.replace(/\s/g, ''));
+                showCustomAlert("Community Contact (WhatsApp) successfully updated.", true); 
+                loadAdminData();
+            } else {
+                showCustomAlert("The WhatsApp number cannot be empty.", false); 
+            }
+        };
+
+        const loadRulesEditor = () => {
+            const rules = getRules();
+            const rulesListAdmin = document.getElementById('active-rules-list');
+            rulesListAdmin.innerHTML = '';
+
+            rules.forEach((rule, index) => {
+                const li = document.createElement('li');
+                const isFoldingBikeRule = rule.includes(DILARANG_KERAS);
+                
+                li.innerHTML = `
+                    <span>${rule}</span>
+                    <button class="btn ${isFoldingBikeRule ? 'btn-secondary' : 'btn-danger'} btn-small" data-index="${index}" ${isFoldingBikeRule ? 'disabled' : ''} onclick="removeRule(${index}, event)">
+                        ${isFoldingBikeRule ? 'Absolute' : 'Delete'} 
+                    </button>
+                `;
+                rulesListAdmin.appendChild(li);
+            });
+
+            document.getElementById('rules-count').textContent = rules.length;
+        };
+        
+        // Make removeRule globally accessible for onclick in HTML
+        window.removeRule = (index, e) => {
+            e.preventDefault();
+            if (confirm("Are you sure you want to delete this rule?")) { 
+                let rules = getRules();
+                rules.splice(index, 1);
+                saveData(KEYS.RULES, rules);
+                showCustomAlert("Rule successfully deleted.", true); 
+                loadRulesEditor();
+            }
+        };
+
+        const addRule = () => {
+            const newRuleInput = document.getElementById('admin-new-rule');
+            const newRuleText = newRuleInput.value.trim();
+
+            if (newRuleText) {
+                let rules = getRules();
+                rules.push(newRuleText);
+                saveData(KEYS.RULES, rules);
+                loadRulesEditor();
+                newRuleInput.value = '';
+                showCustomAlert("New rule successfully added.", true); 
+            } else {
+                showCustomAlert("Rule cannot be empty.", false); 
+            }
+        };
+
+        // --- INITIALIZATION & ROUTING (FIXED) ---
+        const handleRouting = () => {
+            const memberId = localStorage.getItem(KEYS.ACTIVE_MEMBER);
+            const isAdmin = localStorage.getItem(KEYS.IS_ADMIN) === 'true';
+            const currentHash = window.location.hash; // Get the current hash from URL
+
+            if (isAdmin) {
+                navigateToView('admin-view');
+            } else if (memberId) {
+                navigateToView('member-view');
+            } else {
+                // If landing page, check for specific login hashes
+                if (currentHash === '#admin-login' || currentHash === '#member-login') {
+                    // Pass hash to navigateToView to trigger the scroll function
+                    navigateToView('landing-view', currentHash); 
+                } else {
+                    navigateToView('landing-view');
+                }
+            }
+        };
+
+        // Listen for URL changes (simulating navigation)
+        window.addEventListener('hashchange', () => {
+            // Re-run routing logic to handle the new hash and scrolling
+            handleRouting();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Attach main form listeners
+            document.getElementById('member-register-form').addEventListener('submit', handleMemberLogin);
+            document.getElementById('admin-login-form').addEventListener('submit', handleAdminLogin);
+            
+            // Run initial routing
+            handleRouting();
+        });
+    </script>
+</body>
+</html>
